@@ -1,0 +1,15 @@
+{
+  "main.css": "/nekochan/static/css/main.0af5c45f.chunk.css",
+  "main.js": "/nekochan/static/js/main.41b30c22.chunk.js",
+  "main.js.map": "/nekochan/static/js/main.41b30c22.chunk.js.map",
+  "runtime~main.js": "/nekochan/static/js/runtime~main.baf6bcf3.js",
+  "runtime~main.js.map": "/nekochan/static/js/runtime~main.baf6bcf3.js.map",
+  "vendors~main.js": "/nekochan/static/js/vendors~main.0b49ec49.chunk.js",
+  "vendors~main.js.map": "/nekochan/static/js/vendors~main.0b49ec49.chunk.js.map",
+  "./service-worker.js": "/nekochan/./service-worker.js",
+  "favicon.ico": "/nekochan/favicon.ico",
+  "index.html": "/nekochan/index.html",
+  "logo.svg": "/nekochan/logo.svg",
+  "manifest.json": "/nekochan/manifest.json",
+  "precache-manifest.51d624e5e0d84e9916582608e3b27b16.js": "/nekochan/precache-manifest.51d624e5e0d84e9916582608e3b27b16.js"
+}
