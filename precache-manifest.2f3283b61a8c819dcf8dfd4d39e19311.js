@@ -4,7 +4,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nekochan/favicon.ico"
   },
   {
-    "revision": "4ec49bb0a506decfe285210426527c65",
+    "revision": "0736931dc04ba4124612a89556ca1a6b",
     "url": "/nekochan/index.html"
   },
   {
@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nekochan/logo.svg"
   },
   {
-    "revision": "1c82903c2994c2507b385b9042bbfac5",
+    "revision": "01b7c988377689b1ae1bc70d31c34907",
     "url": "/nekochan/manifest.json"
   },
   {
