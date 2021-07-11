@@ -1,25 +1,25 @@
 module Main exposing (..)
 
+import Bootstrap.CDN as CDN
+import Bootstrap.Grid as Grid
+import Bootstrap.Modal as Modal
 import Browser
 import Html exposing (Html, div, h1, img, text)
-import Html.Attributes exposing (src)
+import Html.Attributes exposing (src, style)
+import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string)
-
-
-
----- FLAGS ----
-
-
-type alias Flags =
-    { apiKey : String }
 
 
 
 ---- MODEL ----
 
 
-type State
+type alias Flags =
+    { apiKey : String }
+
+
+type CatImageState
     = Failure
     | Loading
     | Success (List String)
@@ -27,13 +27,15 @@ type State
 
 type alias Model =
     { flags : Flags
-    , state : State
+    , catImageState : CatImageState
+    , modalVisibility : Modal.Visibility
+    , selectImageUrl : Maybe String
     }
 
 
 init : Flags -> ( Model, Cmd Msg )
 init flags =
-    ( { flags = flags, state = Loading }, getCats flags.apiKey )
+    ( { flags = flags, catImageState = Loading, modalVisibility = Modal.hidden, selectImageUrl = Nothing }, getCats flags.apiKey )
 
 
 
@@ -42,6 +44,8 @@ init flags =
 
 type Msg
     = GotCats (Result Http.Error (List String))
+    | CloseModal
+    | ShowModal String
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -50,10 +54,16 @@ update msg model =
         GotCats result ->
             case result of
                 Ok images ->
-                    ( { flags = model.flags, state = Success images }, Cmd.none )
+                    ( { model | catImageState = Success images }, Cmd.none )
 
                 Err _ ->
-                    ( { flags = model.flags, state = Failure }, Cmd.none )
+                    ( { model | catImageState = Failure }, Cmd.none )
+
+        CloseModal ->
+            ( { model | modalVisibility = Modal.hidden, selectImageUrl = Nothing }, Cmd.none )
+
+        ShowModal imageUrl ->
+            ( { model | modalVisibility = Modal.shown, selectImageUrl = Just imageUrl }, Cmd.none )
 
 
 
@@ -62,21 +72,47 @@ update msg model =
 
 viewImage : String -> Html Msg
 viewImage image =
-    img [ src image ] []
+    img [ src image, style "margin" "15px", onClick (ShowModal image) ] []
 
 
-view : Model -> Html Msg
-view model =
+viewModal : Model -> Html Msg
+viewModal model =
+    Modal.config CloseModal
+        |> Modal.small
+        |> Modal.body []
+            [ Grid.containerFluid [ style "text-align" "center" ]
+                [ case model.selectImageUrl of
+                    Just url ->
+                        img [ src url ] []
+
+                    Nothing ->
+                        text ""
+                ]
+            ]
+        |> Modal.view model.modalVisibility
+
+
+viewMainContent : Model -> Html Msg
+viewMainContent model =
     div []
-        [ h1 [] [ text "Neko chan" ]
-        , div []
-            (case model.state of
+        [ h1 [ style "text-align" "center" ] [ text "Neko chan" ]
+        , div [ style "text-align" "center" ]
+            (case model.catImageState of
                 Success images ->
                     List.map viewImage images
 
                 _ ->
                     List.map viewImage []
             )
+        , viewModal model
+        ]
+
+
+view : Model -> Html Msg
+view model =
+    Grid.container []
+        [ CDN.stylesheet
+        , viewMainContent model
         ]
 
 
