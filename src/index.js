@@ -2,11 +2,17 @@ import './main.css';
 import { Elm } from './Main.elm';
 import * as serviceWorker from './serviceWorker';
 
-Elm.Main.init({
+var app = Elm.Main.init({
   node: document.getElementById('root'),
   flags: {
     apiKey: process.env.ELM_APP_CAT_API_KEY
   }
+});
+
+document.getElementById("audio-player").volume = 0.1;
+
+app.ports.playAudio.subscribe(function () {
+  document.getElementById("audio-player").play();
 });
 
 // If you want your app to work offline and load faster, you can change

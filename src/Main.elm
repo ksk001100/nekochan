@@ -1,14 +1,21 @@
-module Main exposing (..)
+port module Main exposing (..)
 
 import Bootstrap.CDN as CDN
 import Bootstrap.Grid as Grid
 import Bootstrap.Modal as Modal
 import Browser
-import Html exposing (Html, div, h1, img, text)
-import Html.Attributes exposing (src, style)
+import Html exposing (Html, audio, button, div, h1, img, text)
+import Html.Attributes exposing (id, src, style)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string)
+
+
+
+---- PORTS ----
+
+
+port playAudio : String -> Cmd msg
 
 
 
@@ -46,6 +53,7 @@ type Msg
     = GotCats (Result Http.Error (List String))
     | CloseModal
     | ShowModal String
+    | PlayAudio
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -65,9 +73,40 @@ update msg model =
         ShowModal imageUrl ->
             ( { model | modalVisibility = Modal.shown, selectImageUrl = Just imageUrl }, Cmd.none )
 
+        PlayAudio ->
+            ( model, playAudio "play" )
+
 
 
 ---- VIEW ----
+
+
+viewAudioButton : Html Msg
+viewAudioButton =
+    div []
+        [ button
+            [ onClick PlayAudio
+            , style "position" "fixed"
+            , style "bottom" "10px"
+            , style "right" "10px"
+            , style "width" "10vh"
+            , style "height" "10vh"
+            , style "padding" "0"
+            , style "margin" "0"
+            , style "background" "none"
+            , style "border" "none"
+            ]
+            [ img
+                [ src "%PUBLIC_URL%/assets/images/nikukyuu.png"
+                , style "width" "10vh"
+                , style "height" "10vh"
+                , style "padding" "0"
+                , style "margin" "0"
+                ]
+                []
+            ]
+        , audio [ src "%PUBLIC_URL%/assets/sounds/meow.mp3", id "audio-player" ] []
+        ]
 
 
 viewImage : String -> Html Msg
@@ -105,6 +144,7 @@ viewMainContent model =
                     List.map viewImage []
             )
         , viewModal model
+        , viewAudioButton
         ]
 
 
