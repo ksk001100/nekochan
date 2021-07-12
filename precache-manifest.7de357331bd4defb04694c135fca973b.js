@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "987da976a8b2a4169346a497ba84749d",
+    "revision": "f672d7567ae7c82fd09300dcae8d35d5",
     "url": "/nekochan/favicon.ico"
   },
   {
