@@ -1,4 +1,4 @@
-port module Main exposing (..)
+module Main exposing (..)
 
 import Bootstrap.CDN as CDN
 import Bootstrap.Grid as Grid
@@ -9,13 +9,7 @@ import Html.Attributes exposing (id, src, style)
 import Html.Events exposing (onClick)
 import Http
 import Json.Decode exposing (Decoder, field, string)
-
-
-
----- PORTS ----
-
-
-port playAudio : String -> Cmd msg
+import Ports exposing (playAudio)
 
 
 
@@ -74,7 +68,7 @@ update msg model =
             ( { model | modalVisibility = Modal.shown, selectImageUrl = Just imageUrl }, Cmd.none )
 
         PlayAudio ->
-            ( model, playAudio "play" )
+            ( model, playAudio () )
 
 
 
