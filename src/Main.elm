@@ -1,8 +1,12 @@
 module Main exposing (..)
 
 import Bootstrap.CDN as CDN
+import Bootstrap.Card as Card
+import Bootstrap.Card.Block as Block
 import Bootstrap.Grid as Grid
 import Bootstrap.Modal as Modal
+import Bootstrap.Spinner as Spinner
+import Bootstrap.Text as Text
 import Browser
 import Html exposing (Html, audio, button, div, h1, img, text)
 import Html.Attributes exposing (id, src, style)
@@ -125,6 +129,24 @@ viewModal model =
         |> Modal.view model.modalVisibility
 
 
+viewCatFailure : Html Msg
+viewCatFailure =
+    Card.config [ Card.outlineDanger ]
+        |> Card.block []
+            [ Block.text [] [ text "Load failure..." ] ]
+        |> Card.view
+
+
+viewCatLoading : Html Msg
+viewCatLoading =
+    Spinner.spinner
+        [ Spinner.grow
+        , Spinner.large
+        , Spinner.color Text.primary
+        ]
+        [ Spinner.srMessage "Loading..." ]
+
+
 viewMainContent : Model -> Html Msg
 viewMainContent model =
     div []
@@ -134,8 +156,11 @@ viewMainContent model =
                 Success images ->
                     List.map viewImage images
 
-                _ ->
-                    List.map viewImage []
+                Loading ->
+                    [ viewCatLoading ]
+
+                Failure ->
+                    [ viewCatFailure ]
             )
         , viewModal model
         , viewAudioButton
