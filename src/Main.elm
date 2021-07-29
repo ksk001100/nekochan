@@ -140,8 +140,7 @@ viewCatFailure =
 viewCatLoading : Html Msg
 viewCatLoading =
     Spinner.spinner
-        [ Spinner.grow
-        , Spinner.large
+        [ Spinner.large
         , Spinner.color Text.primary
         ]
         [ Spinner.srMessage "Loading..." ]
