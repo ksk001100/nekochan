@@ -12,7 +12,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nekochan/favicon.ico"
   },
   {
-    "revision": "950c16c8647894cd00e7dc5af2230a73",
+    "revision": "b767ed8d41de55711243e68db399aed3",
     "url": "/nekochan/index.html"
   },
   {
@@ -24,12 +24,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/nekochan/manifest.json"
   },
   {
-    "revision": "28f237e64272e50377e7",
+    "revision": "837ceecb31c60c3140e1",
     "url": "/nekochan/static/css/main.0af5c45f.chunk.css"
   },
   {
-    "revision": "28f237e64272e50377e7",
-    "url": "/nekochan/static/js/main.28f237e6.chunk.js"
+    "revision": "837ceecb31c60c3140e1",
+    "url": "/nekochan/static/js/main.837ceecb.chunk.js"
   },
   {
     "revision": "baf6bcf3951b3836591e",
