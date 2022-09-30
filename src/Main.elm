@@ -185,7 +185,7 @@ getCats apiKey =
         , headers =
             [ Http.header "x-api-key" apiKey
             ]
-        , url = "https://api.thecatapi.com/v1/images/search?limit=100"
+        , url = "https://api.thecatapi.com/v1/images/search?limit=10"
         , expect = Http.expectJson GotCats catsDecoder
         , body = Http.emptyBody
         , timeout = Nothing
